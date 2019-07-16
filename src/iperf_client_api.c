@@ -488,7 +488,9 @@ iperf_run_client(struct iperf_test * test)
 	memcpy(&read_set, &test->read_set, sizeof(fd_set));
 	memcpy(&write_set, &test->write_set, sizeof(fd_set));
 	iperf_time_now(&now);
-	timeout = tmr_timeout(&now);
+	//timeout = tmr_timeout(&now);
+	imeout.tv_sec = 0;
+	imeout.tv_usec = 0;
 	result = select(test->max_fd + 1, &read_set, &write_set, NULL, timeout);
 	if (result < 0 && errno != EINTR) {
   	    i_errno = IESELECT;
